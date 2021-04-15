@@ -9,22 +9,23 @@ public class Character {
 	 
 	 private  Spec Type;
 	 
-	 public Character(String name, Spec type) {
+	 public Character(String name, int s) {
 		 this.Name=name;
-		 this.Type=type;
 		 this.Level=1;
 		 this.Experience=0;
-		 SetStartingStats(type);
+		 SetStartingStats(s);
 		 
 	 }
-	 void SetStartingStats(Spec s){
-		 switch(s) {
-		  case WARIOR:
-			  SetHealth(15);
-			  SetPower(13);
-			  SetArmor(15);
+	 void SetStartingStats(int a) {	
+		 switch(a) {
+		  case 1:
+			 Type=Spec.WARIOR;
+			 SetHealth(15);
+			 SetPower(13);
+			 SetArmor(15);
 		    break;
-		  case ARCHER:			 
+		  case 2:			 
+			  Type=Spec.ARCHER;
 			  SetHealth(6);
 			  SetPower(20);
 			  SetArmor(6);
@@ -34,7 +35,7 @@ public class Character {
 	 
 	 
 	 //Getterek ezekkel lehet kiolvasni a betokozott adatokat
-	 public  String GetName() {
+	 public String GetName() {
 		 return Name;
 	 }
 	 public int GetLevel() {
