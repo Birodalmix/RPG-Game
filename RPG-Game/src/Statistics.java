@@ -2,28 +2,23 @@ import java.util.Scanner;
 
 public class Statistics {
 
-	public static Character character;
 	
 	public static void GetStatistics(){
 		
 		Menu.clear();
-		try {
-		System.out.println("A hõs neve: "+character.GetName());
-		System.out.println("A hõs szintje: "+character.GetLevel());
-		System.out.println("A hõs tapasztalati pontja: "+character.GetExperience());
+		System.out.println("A hõs neve: "+Menu.character.GetName());
+		System.out.println("A hõs szintje: "+Menu.character.GetLevel());
+		System.out.println("A hõs tapasztalati pontja: "+Menu.character.GetExperience()+"/"+Menu.character.GetLevel()*8);
 		
-		System.out.println("A hõs ereje: "+character.GetPower());
-		System.out.println("A hõs életerõ pontja: "+character.GetHealth());
-		System.out.println("A hõs páncélja: "+character.GetArmor());
-		System.out.println("A hõs tipusa: "+character.GetType());
-		}catch (Exception e) {
+		System.out.println("A hõs aranya: "+Menu.character.GetGold());
+		
+		System.out.println("A hõs ereje: "+Menu.character.GetPower());
+		System.out.println("A hõs életerõ pontja: "+Menu.character.GetHealth());
+		System.out.println("A hõs páncélja: "+Menu.character.GetArmor());
+		System.out.println("A hõs tipusa: "+Menu.character.GetType());
 		System.out.println("Nyomj egy entert hogy vissza menj a menübe!");
-		Scanner counta = new Scanner(System.in);
-		counta.nextLine();
-		Menu.clear();
-		Menu.Continue();
-		counta.close();
+		Menu.Back();
 		}
 	}
-}
+
 

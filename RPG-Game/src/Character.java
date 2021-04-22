@@ -3,11 +3,15 @@ public class Character {
 	 private  int Level;
 	 private  int Experience;
 	 
+	 private static  int gold;
+	 
 	 private  int Health;
 	 private  int Power;
 	 private  int Armor;
 	 
 	 private  Spec Type;
+	 
+	 private int TrueDamage;
 	 
 	 public Character(String name, int s) {
 		 this.Name=name;
@@ -22,13 +26,13 @@ public class Character {
 			 Type=Spec.WARIOR;
 			 SetHealth(15);
 			 SetPower(13);
-			 SetArmor(15);
+			 SetArmor(2);
 		    break;
 		  case 2:			 
 			  Type=Spec.ARCHER;
 			  SetHealth(6);
 			  SetPower(20);
-			  SetArmor(6);
+			  SetArmor(5);
 		    break; 
 		}
 	 }
@@ -63,10 +67,27 @@ public class Character {
 		 Name=n;
 	 }
 	 public  void SetLevel(int l) {
-		 Level=l;
+		
+		 if(Level<l) {
+			 Level=l;
+			 SetHealth(GetHealth()+10);
+			 SetPower(GetPower()+4);
+			 if(Menu.character.GetLevel()>=Quest.getQLevel()) {
+				 Quest.FirstQ();
+			 }
+		}
 	 }
 	 public  void SetExperience(int e) {
 		 Experience=e;
+		 Quest.setQExperienceContainer(Quest.getQExperienceContainer()+e);
+		 if(Quest.getQExperienceContainer()>=Quest.getQExperienceCost()) {
+			 Quest.SeconQ();
+		 }
+		 if(Menu.character.GetExperience()>=Menu.character.GetLevel()*8) {
+			 SetExperience(Menu.character.GetExperience()-Menu.character.GetLevel()*8);
+			 SetLevel(GetLevel()+1);
+			 System.out.println("Szintet léptél!\n Az új szinted: "+Menu.character.GetLevel()+".\n További "+(Menu.character.GetLevel()*8-Menu.character.GetExperience())+" tapasztalati pont kell a következõ szinthez!");
+		 }
 	 }
 	 public  void SetHealth(int h) {
 		 Health=h;
@@ -87,5 +108,24 @@ public class Character {
 		    break; 
 		}
 	 }
+	 
+	 public int GetGold() {
+			return gold;
+		}
+
+		public void SetGold(int gold) {
+			Character.gold = gold;
+		}
+	 
+	public int getTrueDamage() {
+		return TrueDamage;
+	}
+	public void setTrueDamage(int Damage,int Armor) {
+		if(0 <= Damage-Armor) {
+		TrueDamage = Damage-Armor;
+		}else {
+			TrueDamage = 0;
+		}
+	}
 	 
 }

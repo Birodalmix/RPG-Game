@@ -4,6 +4,7 @@ public class Monster {
 	private int Health;
 	private int Power;
 	private int Armor;
+	private int TrueDamage;
 	
 	private Monstre Type;
 	
@@ -17,21 +18,21 @@ public class Monster {
 		 switch(a) {
 		  case 1:
 			 Type=Monstre.BAT;
-			 SetHealth(3);
-			 SetPower(1);
-			 SetArmor(1);
+			 SetHealth(70*Dungeon.GetLevel());
+			 SetPower(3*Dungeon.GetLevel());
+			 SetArmor(0+Dungeon.GetLevel());
 		    break;
 		  case 2:			 
 			  Type=Monstre.SPIDER;
-			  SetHealth(1);
-			  SetPower(5);
-			  SetArmor(0);	  
+			  SetHealth(70*Dungeon.GetLevel());
+			  SetPower(30*Dungeon.GetLevel());
+			  SetArmor(0+Dungeon.GetLevel());	  
 		    break; 
 		  case 3:			 
 			  Type=Monstre.DOG;
-			  SetHealth(2);
-			  SetPower(3);
-			  SetArmor(3);	  
+			  SetHealth(70*Dungeon.GetLevel());
+			  SetPower(3*Dungeon.GetLevel());
+			  SetArmor(0+Dungeon.GetLevel());	  
 		    break; 
 		 }
 		}
@@ -83,5 +84,16 @@ public class Monster {
 			    break; 
 			}
 		 }
+		 
+		public int getTrueDamage() {
+			return TrueDamage;
+		}
+		public void setTrueDamage(int Damage,int Armor) {
+			if(0 <= Damage-Armor) {
+				TrueDamage = Damage-Armor;
+				}else {
+					TrueDamage = 0;
+				}
+		}
 	 
 }

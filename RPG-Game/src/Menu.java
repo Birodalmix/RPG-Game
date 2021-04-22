@@ -13,12 +13,11 @@ public class Menu {
 			  NewGame();
 		    break;
 		  case 2:			 
-			  try {
-				  character.GetName();
+			  if(character!=null) {
 				  Continue();
-			    } catch (Exception e) {
-			    	NewGame();
-			    }
+			  }else {
+				  NewGame();
+			  }
 		    break; 
 		  case 3:
 			  Exit();
@@ -40,6 +39,8 @@ public class Menu {
 		clear();
 		
 		Continue();
+		neve.close();
+		data.close();
 	}
 	public static void Continue() {
 		System.out.println("--------------------\nÜdvözöllek "+ character.GetName() +"!\n 1.Statisztika \n 2.Kazamata mászás folytatás \n 3.Bolt \n 4.Küldetések \n 5.Kilépés\n--------------------");
@@ -74,13 +75,37 @@ public class Menu {
 	     }
 	 }
 	public static void DunCrawl() {
-		System.out.println("Müködik");
+		clear();
+		System.out.println("--------------------\nÜdvözöllek "+ character.GetName() +"!\nA Kazamata Szintje: " + Dungeon.GetLevel()+ "/20 \n 1.Kazamata mászás folytatás \n 2.Vissza a menübe\n--------------------");
+		Scanner counta = new Scanner(System.in);
+		int menus=counta.nextInt();
+		switch(menus) {
+		  case 1:
+			  Dungeon.LevelGenerator();
+			  Battle.setStartHP(Menu.character.GetHealth());
+			  Battle.DungeonStarter();
+			 Battle.SetBattle();
+		    break;
+		  case 2:	
+			  Continue();
+		    break; 
+		}
+		
 	}
+
 	public static void Shop() {
 		System.out.println("Müködik");
 	}
 	public static void Quest() {
-		System.out.println("Müködik");
+		Quest.Selecter();
 	}
 
+	public static void Back(){
+		Scanner counta = new Scanner(System.in);
+		counta.nextLine();
+		Menu.clear();
+		Menu.Continue();
+		counta.close();
+	}
+	
 }
